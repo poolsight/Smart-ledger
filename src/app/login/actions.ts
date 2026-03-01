@@ -14,7 +14,7 @@ export async function login(formData: FormData) {
     })
 
     if (error) {
-        return redirect('/login?message=Could not authenticate user')
+        return redirect(`/login?message=${encodeURIComponent(error.message)}`)
     }
 
     return redirect('/dashboard')
@@ -31,11 +31,9 @@ export async function signup(formData: FormData) {
     })
 
     if (error) {
-        return redirect('/login?message=Could not authenticate user')
+        return redirect(`/login?message=${encodeURIComponent(error.message)}`)
     }
 
-    // After signup, we also want to create a profile automatically.
-    // We can do this via trigger in SQL, but for now we'll handle it during household creation.
     return redirect('/dashboard')
 }
 
